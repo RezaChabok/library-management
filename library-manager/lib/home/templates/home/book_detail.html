@@ -1,0 +1,153 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+        <title>{{book.book_title}}</title>
+      
+    
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+      
+    
+      
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <body class="img js-fullheight" style="background-image: url(&quot;{% static 'home/images/book-bg.png' %}&quot;); height: 350px;"></body>
+</head>
+<style>
+     a:link {
+          color: green;
+          background-color: transparent;
+          text-decoration: none;
+        }
+        a:visited {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+        }
+        a:hover {
+          color: red;
+          background-color: transparent;
+          text-decoration: underline;
+        }
+        a:active {
+          color: yellow;
+          background-color: transparent;
+          text-decoration: underline;
+        }
+    .table {
+    margin: 0 auto;
+    width: 80%;
+}
+.zui-table {
+    border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: normal 13px Arial, sans-serif;
+}
+.zui-table thead th {
+    background-color: #DDEFEF;
+    border: solid 1px #DDEEEE;
+    color: #336B6B;
+    padding: 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
+}
+.zui-table tbody td {
+    border: solid 1px #DDEEEE;
+    color: #333;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #fff;
+}
+.zui-table-rounded {
+    border: none;
+}
+.zui-table-rounded thead th {
+    background-color: #CFAD70;
+    border: none;
+    text-shadow: 1px 1px 1px #ccc;
+    color: #333;
+}
+.zui-table-rounded thead th:first-child {
+    border-radius: 10px 0 0 0;
+}
+.zui-table-rounded thead th:last-child {
+    border-radius: 0 10px 0 0;
+}
+.zui-table-rounded tbody td {
+    border: none;
+    border-top: solid 1px #957030;
+    background-color: #EED592;
+}
+.zui-table-rounded tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 10px;
+}
+.zui-table-rounded tbody tr:last-child td:last-child {
+    border-radius: 0 0 10px 0;
+}
+</style>
+
+
+<div class="text-center" >
+                <span class="badge badge-pill badge-primary bg-dark">مشخصات کتاب {{book.book_title}}</span>
+            </div>
+    
+  <table class="table zui-table zui-table-rounded ">
+    <thead>
+        <tr>
+            <th>نام کتاب</th>
+            <th>محل قرار گیری</th>
+            <th>شناسه ملی</th>
+            <th>شماره سریال</th>
+            <th>وضعیت</th>
+            <th>زبان</th>
+            <th>موضوع</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{book.book_title}}</td>
+            <td>قفسه:{{address.shelf}} راهرو:{{address.corridor}}</td>
+            <td>{{book.isbn}}</td>
+            <td>{{address.serial_code}}</td>
+            <td>{{book.book_status}}</td>
+            <td>{{book.lang}}</td>
+            <td>{{book.category}}</td>
+        </tr>
+        
+    </tbody>
+</table>
+
+<div class="text-center" >    
+    
+    <a href="/">
+        <button type="button" class="btn btn-info">صفحه اصلی</button>   
+    </a>
+        
+        
+
+</div>
+<div class="text-center" >    
+    
+    <a href="/logout">
+        <button type="button" class="btn btn-danger">خروج</button>   
+    </a>
+        
+        
+
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+
+
+
+
+
+</html>

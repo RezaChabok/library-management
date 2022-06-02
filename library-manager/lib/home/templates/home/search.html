@@ -1,0 +1,206 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+        <title>گزارش</title>
+      
+    
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+      
+    
+      
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <body class="js-fullheight" style="background-image: url(&quot;{% static 'home/images/search-bg.jpg' %}&quot;);"></body>
+</head>
+<style>
+    .h3{
+      color: rgb(0, 0, 0);
+      text-align: right;
+    }
+    a:link {
+          color: green;
+          background-color: transparent;
+          text-decoration: none;
+        }
+        a:visited {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+        }
+        a:hover {
+          color: red;
+          background-color: transparent;
+          text-decoration: underline;
+        }
+        a:active {
+          color: yellow;
+          background-color: transparent;
+          text-decoration: underline;
+        }
+        .table {
+          margin: 0 auto;
+          width: 80%;
+        }
+        .zui-table {
+    border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: normal 13px Arial, sans-serif;
+}
+.zui-table thead th {
+    background-color: #DDEFEF;
+    border: solid 1px #DDEEEE;
+    color: #336B6B;
+    padding: 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
+}
+.zui-table tbody td {
+    border: solid 1px #DDEEEE;
+    color: #333;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #fff;
+    text-align: center;
+}
+.zui-table-rounded {
+    border: none;
+}
+.zui-table-rounded thead th {
+    background-color: #c9cf70;
+    border: none;
+    text-shadow: 1px 1px 1px #ccc;
+    color: #333;
+    text-align: center;
+}
+.zui-table-rounded thead th:first-child {
+    border-radius: 10px 0 0 0;
+}
+.zui-table-rounded thead th:last-child {
+    border-radius: 0 10px 0 0;
+}
+.zui-table-rounded tbody td {
+    border: none;
+    border-top: solid 1px #389530;
+    background-color: #c6ee92;
+}
+.zui-table-rounded tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 10px;
+}
+.zui-table-rounded tbody tr:last-child td:last-child {
+    border-radius: 0 0 10px 0;
+}
+</style>
+<div class="text-center" >
+    <span class="badge badge-pill badge-primary bg-dark">تهیه گزارشات</span>
+</div>
+<h3 class="h3">:تهیه گزارش از کتاب های قرض داده شده</h3>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="login-wrap p-0">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="hidden"  id="csrf_token" value="{{ csrf_token }}" name="csrf_token"/>
+                <input type="date" placeholder="از"  id="from" value="{{ request.GET.from }}" name="from"/>
+                <input type="date" placeholder="تا"  id="to"  value="{{ request.GET.to }}" name="to"/>
+                <button type="submit" value="ok" class="btn btn-primary submit col-md-2">search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{%  if search %}
+<h3 class="h3">:لیست کتابهای قرض داده شده در بازه ی زمانی انتخاب شده</h3>   
+  
+<div class="justify-content-md-center text-center">
+  <table class="table zui-table zui-table-rounded ">
+    <thead>
+        <tr>
+            <th>نام کتاب</th>
+            <th>شناسه ملی کتاب</th>
+            <th> تاریخ امانت گرفتن</th>
+            <th>تاریخ مقرر تحویل</th>
+            <th>شخصی که تحویل گرفته</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in search %}
+        <tr>
+            <td><a  href="/book/{{i.isbn}}"> {{i.isbn.book_title}} </a></td>
+            <td>{{i.isbn}}</td>
+            <td>{{i.borrowed_from}}</td>
+            <td>{{i.borrowed_to}}</td>
+            <td>{{i.userid}}</td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endif %}
+      
+<h3 class="h3">:جستجوی وضعیت کتاب براساس نام</h3>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="login-wrap p-0">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="hidden"  id="csrf_token" value="{{ csrf_token }}" name="csrf_token"/>
+                <input type="text" placeholder="نام"  id="title" value="{{ request.GET.title }}" name="title"/>
+                <button type="submit" value="ok" class="btn btn-primary submit col-md-2">search</button>
+            </form>
+        </div>
+    </div>
+</div>
+{%  if status %}
+<h3 class="h3">:اطلاعات مربوط به کتاب مورد نظر</h3>   
+  
+<div class="justify-content-md-center text-center">
+  <table class="table zui-table zui-table-rounded ">
+    <thead>
+        <tr>
+            <th>نام کتاب</th>
+            <th>شناسه ملی کتاب</th>
+            <th>وضعیت</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a  href="/book/{{status.isbn}}"> {{status.book_title}} </a></td>
+            <td>{{status}}</td>
+            <td>{{status.book_status}}</td>
+            
+        </tr>
+    </tbody>
+</table>
+</div>
+{% endif %}
+
+
+</body>
+<!-- JavaScript Bundle with Popper -->
+<div class="text-center" >    
+    
+    <a href="/">
+        <button type="button" class="btn btn-info">صفحه اصلی</button>   
+    </a>
+        
+        
+
+</div>
+<div class="text-center" >    
+    
+    <a href="/logout">
+        <button type="button" class="btn btn-danger">خروج</button>   
+    </a>
+        
+        
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</html>
