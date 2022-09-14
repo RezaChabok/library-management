@@ -4,7 +4,7 @@ from .models import DetailUser,UserStaff
 
 @admin.register(DetailUser)
 class AdminDetailUser(admin.ModelAdmin):
-    list_display = ('__str__','id','gender','birth_day','phone','national_id')
+    list_display = ('__str__','id','get_gender','birth_day','get_phone','national_id')
 
 
 @admin.register(UserStaff)
