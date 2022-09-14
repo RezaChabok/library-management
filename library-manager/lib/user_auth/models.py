@@ -27,9 +27,9 @@ class DetailUser(models.Model):
              return "User"
             return "Admin"
         return f'{self.userid.username}-{is_admin(self)}'
-    def gender(self):
+    def get_gender(self):
         return f'{self.gender}'
-    def phone(self):
+    def get_phone(self):
         return f'{self.phone}'
 
 class UserStaff(models.Model):
